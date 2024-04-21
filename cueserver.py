@@ -1,43 +1,41 @@
 #!/usr/bin/python3
-
 # File name: cueserver.py
 # Version: 1.0.0
 # Author: Joseph Adams
 # Email: josephdadams@gmail.com
 # Date created: 8/8/2022
 # Date last modified: 8/8/2022
-
-import sys
 import json
-import requests
-
+import sys
 import urllib.parse
 
+import requests
+
 try:
-	stdinput = sys.stdin.readline()
-	data = json.loads(stdinput)
+    stdinput = sys.stdin.readline()
+    data = json.loads(stdinput)
 
-	ip = data['params']['ip']
-	cuescript = data['params']['cuescript']
+    ip = data['params']['ip']
+    cuescript = data['params']['cuescript']
 
-	port = '80'
+    port = '80'
 
-	print('CueScript: ' + cuescript)
+    print('CueScript: ' + cuescript)
 
-	if cuescript != '':
-		url = 'http://' + ip + ':' + port + '/exe.cgi?cmd=' + urllib.parse.quote_plus(cuescript)
-		
-		print('URL: ' + url)
+    if cuescript != '':
+        url = 'http://' + ip + ':' + port + '/exe.cgi?cmd=' + urllib.parse.quote_plus(cuescript)
 
-		r = requests.get(url = url)
+        print('URL: ' + url)
 
-		print('Response:')
-		print(r)
+        r = requests.get(url = url)
 
-		# probably ran ok
-		print('{ "complete": 1 }')
-	else: #invalid command
-		print('{ "complete": 1, "code": 999, "description": "Invalid CueScript." }')
+        print('Response:')
+        print(r)
+
+        # probably ran ok
+        print('{ "complete": 1 }')
+    else: #invalid command
+        print('{ "complete": 1, "code": 999, "description": "Invalid CueScript." }')
 except Exception as e:
-	print(e)
-	print('{ "complete": 1, "code": 999, "description": "Failed to execute." }')
+    print(e)
+    print('{ "complete": 1, "code": 999, "description": "Failed to execute." }')

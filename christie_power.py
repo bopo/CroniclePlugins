@@ -4,17 +4,15 @@
 #
 # Created by Ian Thompson on Thu Jun 23 2022
 # ianthompson@nicelion.com
-# 
+#
 # Version 1.0
 # Modified: Jun 28, 2022
-
 # Control Christie Projectors via TCP
-
-import sys
 import json
 import socket
+import sys
 
-try: 
+try:
     stdinput = sys.stdin.readline()
     data = json.loads(stdinput)
 
@@ -43,6 +41,5 @@ try:
     print('{ "complete": 1 }')
 
 except:
-    # An ambiguous error message that will definitely help the user 
+    # An ambiguous error message that will definitely help the user
     print('{ "complete": 1, "code": 999, "description": "Failed to execute." }')
-
